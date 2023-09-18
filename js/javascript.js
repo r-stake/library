@@ -26,6 +26,14 @@ function displayBooks() {
   });
 }
 
+function createNewBookCard() {
+  const booksGrid = document.querySelector(".books");
+  const bookElement = document.createElement("div");
+  const btnAddBook = document.querySelector(".add-book");
+  bookElement.classList.add("book");
+  booksGrid.insertBefore(bookElement, btnAddBook);
+}
+
 const book1 = new Book("Stories of the Macabre", "H.P. Lovecraft", 158, "not read yet");
 myLibrary.push(book1);
 
@@ -34,3 +42,5 @@ myLibrary.push(book2)
 
 
 displayBooks();
+createNewBookCard();
+createNewBookCard();
