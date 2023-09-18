@@ -16,6 +16,31 @@
   <div class="container">
     <h1>Welcome to the library</h1>
     <h2>Take as many books as you like, leave as many as you can, and don't worry about the money, it's all paid with rainbows, sunshine, hugs and kisses.</h2>
+    <dialog id="new-book-dialog">
+      <form method="dialog">
+        <h3>Add a new book</h3>
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title">
+        </div>
+        <div>
+          <label for="author">Author:</label>
+          <input type="text" id="author">
+        </div>
+        <div>
+          <label for="pages">Number of pages:</label>
+          <input type="number" id="pages">
+        </div>
+        <div>
+          <label for="status">Have you read this book?</label>
+          <input type="checkbox" id="status">
+        </div>
+        <div>
+          <button id="submit-dialog">Save</button>
+          <button id="close-dialog" value="cancel" formmethod="dialog">Cancel</button>
+        </div>
+      </form>
+    </dialog>
     <div class="books">
       <div class="book"></div>
       <div class="book"></div>
