@@ -1,3 +1,4 @@
+const btnAddBook = document.querySelector(".add-book");
 const myLibrary = [];
 
 // Book object constructor
@@ -21,15 +22,30 @@ function addBookToLibrary() {
 // Loop over the array and display each book
 function displayBooks() {
   console.log(myLibrary);
-  myLibrary.forEach(book => {
-    console.log(book);
-  });
+  for (let i = 0; i < myLibrary.length; i++) {
+    // Display the books title
+    const bookCard = document.querySelector(`.books div:nth-of-type(${i + 1})`);
+    const h3Element = document.createElement("h3");
+    h3Element.textContent = myLibrary[i].title;
+    bookCard.appendChild(h3Element);
+    // Display the books author
+    const paraAuthor = document.createElement("p");
+    paraAuthor.textContent = `Author: ${myLibrary[i].author}`;
+    bookCard.appendChild(paraAuthor);
+    // Display number of pages
+    const paraPages = document.createElement("p");
+    paraPages.textContent = `Number of pages: ${myLibrary[i].pages}`;
+    bookCard.appendChild(paraPages);
+    // Display read status
+    const paraRead = document.createElement("p");
+    paraRead.textContent = myLibrary[i].read;
+    bookCard.appendChild(paraRead);
+  }
 }
 
 function createNewBookCard() {
   const booksGrid = document.querySelector(".books");
   const bookElement = document.createElement("div");
-  const btnAddBook = document.querySelector(".add-book");
   bookElement.classList.add("book");
   booksGrid.insertBefore(bookElement, btnAddBook);
 }
@@ -42,5 +58,5 @@ myLibrary.push(book2)
 
 
 displayBooks();
-createNewBookCard();
-createNewBookCard();
+
+btnAddBook.addEventListener("click", createNewBookCard);
