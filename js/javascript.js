@@ -104,6 +104,7 @@ function addEventListenersForRemovingBook() {
       displayBooks();
       // Update event listener list
       addEventListenersForRemovingBook();
+      addEventListenersForUpdatingStatus();
     });
   });
 }
@@ -120,6 +121,7 @@ function addEventListenersForUpdatingStatus() {
       // Display updated array of books
       displayBooks();
       // Update event listener list
+      addEventListenersForRemovingBook();
       addEventListenersForUpdatingStatus();
     })
   })
@@ -144,8 +146,9 @@ displayBooks();
 
 
 btnAddBook.addEventListener("click", () => {
-  newBookDialog.showModal();
+  newBookDialog.style.display = "block";
 });
+
 
 btnSubmitDialog.addEventListener("click", () => {
   // Get input values from the form
@@ -161,17 +164,21 @@ btnSubmitDialog.addEventListener("click", () => {
     userInputStatusValue = "not read"
   };
 
-  // Create a new card and display book information
-  createNewBookCard();
-  addBookToLibrary(userInputTitleValue, userInputAuthorValue, userInputPagesValue, userInputStatusValue);
-  displayBooks();
-  addEventListenersForRemovingBook();
-  resetForm();
+  if (userInputTitleValue && userInputAuthorValue && userInputPagesValue) {
+    // Create a new card and display book information
+    createNewBookCard();
+    addBookToLibrary(userInputTitleValue, userInputAuthorValue, userInputPagesValue, userInputStatusValue);
+    displayBooks();
+    addEventListenersForRemovingBook();
+    addEventListenersForUpdatingStatus();
+    resetForm();
+    newBookDialog.style.display = "none"
+  }
 });
 
 btnCloseDialog.addEventListener("click", () => {
-  newBookDialog.close();
   resetForm();
+  newBookDialog.style.display = "none"
 });
 
 

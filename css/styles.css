@@ -57,7 +57,6 @@ body {
 }
 
 .book {
-  border: 1px solid black;
   background-color: #5ea821;
   height: 250px;
   border-radius: 20px;
@@ -98,7 +97,7 @@ body {
 }
 
 .book .controls .change-status.not-read:hover {
-  background-color: #e50000;
+  background-color: #cc0000;
 }
 
 .book .controls .remove-book {
