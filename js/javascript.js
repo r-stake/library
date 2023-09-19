@@ -12,6 +12,14 @@ function Book(title, author, pages, status) {
   this.status = status
 }
 
+Book.prototype.updateStatus = function(index) {
+  if (this.status === "read") {
+    this.status = "not read"
+  } else {
+    this.status = "read"
+  }
+}
+
 // Get user's input about the book, create a new book object and store it into the array
 function addBookToLibrary(title, author, pages, status) {
   const book = new Book(title, author, pages, status);
@@ -22,7 +30,7 @@ function addBookToLibrary(title, author, pages, status) {
 function displayBooks() {
   console.log(myLibrary);
   for (let i = 0; i < myLibrary.length; i++) {
-    // Remove previous entries
+    // Remove previous entries from the card
     const bookCard = document.querySelector(`.books div:nth-of-type(${i + 1})`);
     while (bookCard.firstChild) {
       bookCard.removeChild(bookCard.firstChild);
@@ -80,21 +88,41 @@ function removeBookFromArray(attribute) {
 }
 
 // Add event listener for buttons
-function addEventListeners() {
+function addEventListenersForRemovingBook() {
   const btnAllRemoveBook = document.querySelectorAll(".remove-book");
   // Listen for events
   btnAllRemoveBook.forEach(button => {
     button.addEventListener("click", function(event) {
+      // Access relevant parent div and get data value
       const currentCard = event.currentTarget.parentNode.parentNode;
       const currentCardIndex = currentCard.getAttribute("data-index");
-      console.log(currentCardIndex);
+      // Remove book entry from the array
       removeBookFromArray(currentCardIndex);
+      // Remove book card from the grid
       currentCard.remove();
-      console.log(myLibrary);
+      // Display updated array of books
       displayBooks();
-      addEventListeners();
+      // Update event listener list
+      addEventListenersForRemovingBook();
     });
   });
+}
+
+function addEventListenersForUpdatingStatus() {
+  const btnAllUpdateStatus = document.querySelectorAll(".change-status");
+  // Listen for events
+  btnAllUpdateStatus.forEach(button => {
+    button.addEventListener("click", function(event) {
+      const currentCard = event.currentTarget.parentNode.parentNode;
+      const currentCardIndex = currentCard.getAttribute("data-index");
+      // Update array elements status
+      myLibrary[currentCardIndex].updateStatus();
+      // Display updated array of books
+      displayBooks();
+      // Update event listener list
+      addEventListenersForUpdatingStatus();
+    })
+  })
 }
 
 // Reset form input fields
@@ -126,7 +154,8 @@ btnSubmitDialog.addEventListener("click", () => {
   const userInputPagesValue = document.getElementById("pages").value;
   const userInputStatusCheckbox = document.getElementById("status");
   let userInputStatusValue;
-  if (userInputStatusCheckbox.checked) {
+  // set
+  if (userInputStatusCheckbox.checked === true) {
     userInputStatusValue = "read";
   } else {
     userInputStatusValue = "not read"
@@ -136,7 +165,7 @@ btnSubmitDialog.addEventListener("click", () => {
   createNewBookCard();
   addBookToLibrary(userInputTitleValue, userInputAuthorValue, userInputPagesValue, userInputStatusValue);
   displayBooks();
-  addEventListeners();
+  addEventListenersForRemovingBook();
   resetForm();
 });
 
@@ -146,4 +175,5 @@ btnCloseDialog.addEventListener("click", () => {
 });
 
 
-addEventListeners();
+addEventListenersForRemovingBook();
+addEventListenersForUpdatingStatus();
