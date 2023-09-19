@@ -63,11 +63,43 @@ body {
   border-radius: 20px;
   padding: 20px;
   display: grid;
-  grid-template-rows: 60px repeat(3, 1fr);
+  grid-template-rows: 60px repeat(4, minmax(20px, 1fr));
 }
 
-.book h4 {
-  margin-top: 0;
+.book > * {
+  margin: 0;
+}
+
+.book .controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.book .controls .change-status,
+.book .controls .remove-book {
+  background-color: green;
+  border: none;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+  border-radius: 5px;
+}
+
+.book .controls .change-status:hover {
+  background-color: #007300;
+}
+
+.book .controls .remove-book {
+  background-color: red;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+
+.book .controls .remove-book:hover {
+  background-color: #e50000;
+}
+
+.book .change-status i,
+.book .remove-book i {
+  font-size: 1.75rem;
 }
 
 .add-book {

@@ -27,6 +27,8 @@ function displayBooks() {
     while (bookCard.firstChild) {
       bookCard.removeChild(bookCard.firstChild);
     }
+    // Set index number from the array as the data attribute of the book card
+    bookCard.setAttribute("data-index", i);
     // Display the books title
     const h4Element = document.createElement("h4");
     h4Element.textContent = myLibrary[i].title;
@@ -43,6 +45,20 @@ function displayBooks() {
     const paraStatus = document.createElement("p");
     paraStatus.textContent = `Status: ${myLibrary[i].status}`;
     bookCard.appendChild(paraStatus);
+    // Add a div for the buttons
+    const divButtons = document.createElement("div");
+    divButtons.classList.add("controls");
+    bookCard.appendChild(divButtons);
+    // Add change status button
+    const btnChangeStatus = document.createElement("button");
+    btnChangeStatus.classList.add("change-status");
+    btnChangeStatus.innerHTML = `<i class="bi bi-check-lg"></i>`;
+    divButtons.appendChild(btnChangeStatus);
+    // Add a "remove" button
+    const btnRemove = document.createElement("button");
+    btnRemove.classList.add("remove-book");
+    btnRemove.innerHTML = `<i class="bi bi-x-lg"></i>`
+    divButtons.appendChild(btnRemove);
   }
 }
 
