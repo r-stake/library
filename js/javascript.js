@@ -51,8 +51,12 @@ function displayBooks() {
     bookCard.appendChild(divButtons);
     // Add change status button
     const btnChangeStatus = document.createElement("button");
-    btnChangeStatus.classList.add("change-status");
-    btnChangeStatus.innerHTML = `<i class="bi bi-check-lg"></i>`;
+    if (myLibrary[i].status === "read") {
+      btnChangeStatus.classList.add("change-status", "read");
+    } else {
+      btnChangeStatus.classList.add("change-status", "not-read");
+    }
+    btnChangeStatus.innerHTML = "Update status";
     divButtons.appendChild(btnChangeStatus);
     // Add a "remove" button
     const btnRemove = document.createElement("button");
@@ -70,6 +74,37 @@ function createNewBookCard() {
   booksGrid.insertBefore(bookElement, btnAddBook);
 }
 
+// Remove book from the array
+function removeBookFromArray(attribute) {
+  myLibrary.splice(attribute, 1);
+}
+
+// Add event listener for buttons
+function addEventListeners() {
+  const btnAllRemoveBook = document.querySelectorAll(".remove-book");
+  // Listen for events
+  btnAllRemoveBook.forEach(button => {
+    button.addEventListener("click", function(event) {
+      const currentCard = event.currentTarget.parentNode.parentNode;
+      const currentCardIndex = currentCard.getAttribute("data-index");
+      console.log(currentCardIndex);
+      removeBookFromArray(currentCardIndex);
+      currentCard.remove();
+      console.log(myLibrary);
+      displayBooks();
+      addEventListeners();
+    });
+  });
+}
+
+// Reset form input fields
+function resetForm() {
+  document.getElementById("title").value = "";
+  document.getElementById("author").value = "";
+  document.getElementById("pages").value = "";
+  document.getElementById("status").checked = false;
+}
+
 const book1 = new Book("Stories of the Macabre", "H.P. Lovecraft", 158, "not read");
 myLibrary.push(book1);
 
@@ -85,22 +120,30 @@ btnAddBook.addEventListener("click", () => {
 });
 
 btnSubmitDialog.addEventListener("click", () => {
-  const userInputTitle = document.getElementById("title").value;
-  const userInputAuthor = document.getElementById("author").value;
-  const userInputPages = document.getElementById("pages").value;
-  const statusCheckbox = document.getElementById("status");
-  let userInputStatus;
-  if (statusCheckbox.checked) {
-    userInputStatus = "read";
+  // Get input values from the form
+  const userInputTitleValue = document.getElementById("title").value;
+  const userInputAuthorValue = document.getElementById("author").value;
+  const userInputPagesValue = document.getElementById("pages").value;
+  const userInputStatusCheckbox = document.getElementById("status");
+  let userInputStatusValue;
+  if (userInputStatusCheckbox.checked) {
+    userInputStatusValue = "read";
   } else {
-    userInputStatus = "not read"
+    userInputStatusValue = "not read"
   };
 
+  // Create a new card and display book information
   createNewBookCard();
-  addBookToLibrary(userInputTitle, userInputAuthor, userInputPages, userInputStatus)
+  addBookToLibrary(userInputTitleValue, userInputAuthorValue, userInputPagesValue, userInputStatusValue);
   displayBooks();
+  addEventListeners();
+  resetForm();
 });
 
 btnCloseDialog.addEventListener("click", () => {
   newBookDialog.close();
+  resetForm();
 });
+
+
+addEventListeners();

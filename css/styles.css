@@ -76,25 +76,38 @@ body {
   gap: 10px;
 }
 
-.book .controls .change-status,
+.book .controls .change-status.read,
+.book .controls .change-status.not-read,
 .book .controls .remove-book {
-  background-color: green;
   border: none;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.book .controls .change-status:hover {
+.book .controls .change-status.read {
+  background-color: green;
+}
+
+.book .controls .change-status.read:hover {
   background-color: #007300;
 }
 
-.book .controls .remove-book {
+.book .controls .change-status.not-read {
   background-color: red;
+}
+
+.book .controls .change-status.not-read:hover {
+  background-color: #e50000;
+}
+
+.book .controls .remove-book {
+  background-color: #808080;
   box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
 }
 
 .book .controls .remove-book:hover {
-  background-color: #e50000;
+  background-color: #737373;
 }
 
 .book .change-status i,
