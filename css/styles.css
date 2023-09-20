@@ -4,9 +4,33 @@
   box-sizing: border-box;
 }
 
+:root {
+  --main-bg-color: #0f172a;
+  --alt-bg-color: #083344;
+  --add-book-hover-color: #072d3d;
+  --status-notRead-color: #422006;
+  --status-notRead-hover-color: #3b1c05;
+  --status-read-color: #2b4210;
+  --status-read-hover-color: #263b0e;
+  --remove-book-color: #404040;
+  --remove-book-hover-color: #393939;
+  --header-box-shadow-color: 0 25px 75px #1e40af;
+  --card-box-shadow-color: 5px 5px 5px #1e40af;
+  --text-color: #2563eb;
+}
+
 body {
-  background-color: #6b21a8;
-  font-family: 'Roboto', sans-serif;}
+  background-color: var(--main-bg-color);
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color)
+}
+
+header h1 {
+  background-color: var(--alt-bg-color);
+  padding: 35px 200px;
+  margin: 0;
+  box-shadow: var(--header-box-shadow-color)
+}
 
 .container {
   max-width: 800px;
@@ -14,12 +38,31 @@ body {
   margin-bottom: 2rem;
 }
 
-.container h1 {
-  text-align: center;
+.container h2 {
+  margin-top: 2rem;
+}
+
+.container dialog {
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
 }
 
 .container form {
   padding: 0 20px;
+}
+
+.container form input {
+  background-color: var(--alt-bg-color);
+  border-color: var(--text-color);
+  color: var(--text-color);
+  outline: none;
+  border: none;
+  padding: 5px 10px;
+  border: 1px solid var(--text-color);
+}
+
+.container form input:focus {
+  border: 1px solid #92b1f5;
 }
 
 .container form div:nth-of-type(1),
@@ -50,14 +93,15 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: 250px;
   gap: 50px;
+  margin-top: 4rem;
 }
 
 .books > * {
-  box-shadow: 5px 5px 5px #1e293b;
+  box-shadow: var(--card-box-shadow-color)
 }
 
 .book {
-  background-color: #5ea821;
+  background-color: var(--alt-bg-color);
   height: 250px;
   border-radius: 20px;
   padding: 20px;
@@ -84,29 +128,33 @@ body {
   cursor: pointer;
 }
 
+.book .controls .change-status {
+  color: var(--text-color);
+}
+
 .book .controls .change-status.read {
-  background-color: green;
+  background-color: var(--status-read-color);
 }
 
 .book .controls .change-status.read:hover {
-  background-color: #007300;
+  background-color: var(--status-read-hover-color);
 }
 
 .book .controls .change-status.not-read {
-  background-color: red;
+  background-color: var(--status-notRead-color);
 }
 
 .book .controls .change-status.not-read:hover {
-  background-color: #cc0000;
+  background-color: var(--status-notRead-hover-color);
 }
 
 .book .controls .remove-book {
-  background-color: #808080;
+  background-color: var(--remove-book-color);
   box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
 }
 
 .book .controls .remove-book:hover {
-  background-color: #737373;
+  background-color: var(--remove-book-hover-color);
 }
 
 .book .change-status i,
@@ -119,14 +167,15 @@ body {
   cursor: pointer;
   border-radius: 20px;
   height: 250px;
-  background-color: #5ea821;
+  background-color: var(--alt-bg-color);
 }
 
 .add-book:hover {
-  background-color: #54971d;
+    background-color: var(--add-book-hover-color);
 }
 
 .add-book i {
   font-size: 5rem;
-  color: rgb(0, 0, 0, 0.6);
+  color: var(--text-color);
+  opacity: 0.6;
 }
