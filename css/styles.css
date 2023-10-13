@@ -45,6 +45,7 @@ header h1 {
 .container dialog {
   background-color: var(--main-bg-color);
   color: var(--text-color);
+  z-index: 1;
 }
 
 .container form {
