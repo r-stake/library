@@ -4,20 +4,23 @@ const btnCloseDialog = document.getElementById("close-dialog");
 const btnSubmitDialog = document.getElementById("submit-dialog");
 const myLibrary = [];
 
-// Book object constructor
-function Book(title, author, pages, status) {
-  this.title = title,
-  this.author = author,
-  this.pages = pages,
-  this.status = status
-}
-
-Book.prototype.updateStatus = function(index) {
-  if (this.status === "read") {
-    this.status = "not read"
-  } else {
-    this.status = "read"
+// Book class
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title,
+    this.author = author,
+    this.pages = pages,
+    this.status = status
   }
+
+  updateStatus() {
+    if (this.status === "read") {
+      this.status = "not read"
+    } else {
+      this.status = "read"
+    }
+  }
+  
 }
 
 // Get user's input about the book, create a new book object and store it into the array
@@ -135,7 +138,7 @@ function resetForm() {
   document.getElementById("status").checked = false;
 }
 
-const book1 = new Book("Stories of the Macabre", "H.P. Lovecraft", 158, "not read");
+const book1 = new Book("Macabre Stories", "H.P. Lovecraft", 158, "not read");
 myLibrary.push(book1);
 
 const book2 = new Book("Eisenhorn The Omnibus - Warhammer 40,000", "Dan Abnett", 944, "not read");
